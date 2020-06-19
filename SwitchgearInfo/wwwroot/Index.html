@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Температура на распределительных устройствах</title>
+    <script src="src/js/MoveScript.js"></script>
+    <script src="src/js/DataScripts.js"></script>
+    <script src="src/js/Dialog.js"></script>
+    <script src="src/js/Chart.js"></script>
+    <script>refreshSwithgears();</script>
+    <link rel="stylesheet" type="text/css" href="src/css/DialogWindow.css">
+    <link rel="stylesheet" type="text/css" href="src/css/TreeHTML.css">
+    <link rel="stylesheet" type="text/css" href="src/css/Graph.css">
+    <link rel="stylesheet" type="text/css" href="src/css/Tabels.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        setInterval(refreshSwithgears, 300000);
+    </script>
+</head>
+<body>       
+    <div class="SGDiv">
+        <h2>Данные по распределительным устройствам</h2>        
+        <div name="pallete">    
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="hd-1" class="hide">
+                        <label for="hd-1">Работа с точками данных</label>
+                        <div style="width:500px;">
+                            <input id="Button1" type="button" value="Редактировать набор" OnClick="getSGDialog()" />
+                            <div name="pointsPallete" style="width: 500px;  display: flex; flex-wrap: wrap; ">
+
+                            </div>
+                            <input type="checkbox" id="hd-1_1" class="hide">
+                            <label for="hd-1_1" style="width:500px;">Добавление значений</label>
+                            <div style="width:500px;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th style="border:1px black solid;">Точка</th>
+                                            <th style="border:1px black solid;">Значение</th>
+                                            <th style="border:1px black solid;">Дата и время</th>
+                                            <th></th>
+                                            <th><input type="button" value="Очистить!" OnClick="clearRows(event)" /></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td onclick="getSGPointDialog(event);" style="border:1px black solid;"></td>
+                                            <td contenteditable="true" style="border:1px black solid;"></td>
+                                            <td contenteditable="true" style="border:1px black solid;"></td>
+                                            <td></td>
+                                            <td><input type="button" value="Добавить еще" OnClick="addNewRow(event)" /></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <input type="button" value="Отправить данные на сервер" OnClick="sendPoints(event)" />
+                            </div>
+                        </div>                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="checkbox" id="hd-2" class="hide">
+                        <label for="hd-2">Конфигурация</label>
+                        <div name="configPallete">
+                            <table style="width:100%;">
+                                <tr>
+                                    <td rowspan="3">
+                                        <input id="Radio1" type="radio" name="TypeData" valueAsData="Graph" OnClick="viewData();" />
+                                        <label for="Radio1">График</label>
+                                        <input id="Radio2" type="radio" name="TypeData"  valueAsData="Table" OnClick="viewData();"/>
+                                        <label for="Radio2">Таблица</label>
+                                    </td>
+                                    <td></td>
+                                    <td style="text-align:center;">
+                                        <span>Дата с </span>
+                                    </td>
+                                    <td style="text-align:center;">
+                                        
+                                        <span>Дата по </span>
+                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right"><span>Датa:</span></td>
+                                    <td style="border:1px black solid; text-align:center;">
+                                        <input id="DateS" type="date" />
+                                    </td>
+                                    <td style="border:1px black solid; text-align:center;">
+                                        <input id="DatePo" type="date" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:right"><span>время:</span></td>
+                                    <td style="border:1px black solid; text-align:center;">
+                                        <input id="TimeS" type="time" />
+                                    </td>
+                                    <td style="border:1px black solid;  text-align:center;">
+                                        <input id="TimePo" type="time" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4" style="text-align:center">
+                                        <input id="VDButton" type="button" value="Отобразить" OnClick="viewData();" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div>                            
+                            <input type="checkbox" id="hd-3" class="hide" checked="checked">
+                            <label for="hd-3" style="width:500px;">Последние данные</label>
+                            <div style="width:500px;" name="LastData">
+                            </div>
+                        </div>
+                        <div id="curve_chart" style="width: 1100px; height: 500px"></div>
+                        <script>
+                            GetLastData();
+                            setInterval(refreshLastData, 60000);
+                        </script>
+                    </td>
+                </tr>
+            </table>
+            
+           
+            <div name="contentPallete"></div>
+        </div>
+    </div>
+   
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿.dialogWindow {
+    opacity: 1;
+    z-index: 5000;
+    position: absolute;
+    display: inline-block;
+    background-color: white;
+    top:50%;
+    left:50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border: 4px double black;
+}
+
+
+.dialogWindowControlPanel {
+    background-color: Silver;
+    height: 50px;
+    text-align: center;
+    width: 100%;
+}
+
+    .dialogWindowControlPanel > span {
+        font-weight: bold;
+        text-align: center;
+        white-space: pre-line;
+        width:100%;
+        cursor:move;    
+    }
+
+    .dialogWindowControlPanel > input {
+        float: right;
+        margin-left: 10px;
+        vertical-align: top;
+    }
+

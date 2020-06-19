@@ -42,6 +42,7 @@ namespace SwitchgearInfo
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }
